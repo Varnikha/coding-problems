@@ -18,3 +18,6 @@ class Solution(object):
             res+=i
             res-=nums[i]
         return res
+
+Link : 
+https://leetcode.com/problems/missing-number/
