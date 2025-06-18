@@ -20,5 +20,5 @@ coding problems and solutions
 - [Daily Log](./progress/daily-log.md)
 - [Learning Notes](./notes/learning-log.md)
 - [Problem Patterns](./notes/patterns.md)
-- [Problem ](.Problems)
+- [Problem ](./Problems)
 
