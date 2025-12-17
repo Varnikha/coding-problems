@@ -1,177 +1,126 @@
-# 121. Best Time to Buy and Sell Stock
+# 🚀 LeetCode Solutions Repository
 
 <div align="center">
 
-![Difficulty](https://img.shields.io/badge/Difficulty-Easy-brightgreen)
-![Arrays](https://img.shields.io/badge/Topic-Arrays-blue)
-![Dynamic Programming](https://img.shields.io/badge/Topic-Dynamic%20Programming-orange)
+![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)
+![Problems Solved](https://img.shields.io/badge/Solved-150+-brightgreen?style=for-the-badge)
+![Language](https://img.shields.io/badge/Language-Python-blue?style=for-the-badge&logo=python)
+
+**A comprehensive collection of LeetCode problem solutions organized by topics and difficulty levels.**
+
+[View Solutions](#-solutions-by-topic) • [About](#-about) • [Contributing](#-contributing)
 
 </div>
 
 ---
 
-## 📋 Problem Description
+## 📊 Progress Overview
 
-You are given an array `prices` where `prices[i]` is the price of a given stock on the `i`th day.
-
-You want to maximize your profit by choosing a **single day** to buy one stock and choosing a **different day in the future** to sell that stock.
-
-Return the **maximum profit** you can achieve from this transaction. If you cannot achieve any profit, return `0`.
-
-### Example 1:
-```
-Input: prices = [7,1,5,3,6,4]
-Output: 5
-Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
-```
-
-### Example 2:
-```
-Input: prices = [7,6,4,3,1]
-Output: 0
-Explanation: In this case, no transactions are done and the max profit = 0.
-```
-
-### Constraints:
-- `1 <= prices.length <= 10^5`
-- `0 <= prices[i] <= 10^4`
+| Difficulty | Solved | Total |
+|------------|--------|-------|
+| 🟢 Easy    | 60     | 150   |
+| 🟡 Medium  | 75     | 200   |
+| 🔴 Hard    | 15     | 100   |
+| **Total**  | **150**| **450**|
 
 ---
 
-## 💡 Approach
+## 📚 Solutions by Topic
 
-### My Thinking Process
+### 🔢 Arrays
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 1 | [Two Sum](./01-Arrays/Easy/two-sum.md) | 🟢 Easy | [View](./01-Arrays/Easy/two-sum.md) |
+| 15 | [3Sum](./01-Arrays/Medium/3sum.md) | 🟡 Medium | [View](./01-Arrays/Medium/3sum.md) |
+| 42 | [Trapping Rain Water](./01-Arrays/Hard/trapping-rain-water.md) | 🔴 Hard | [View](./01-Arrays/Hard/trapping-rain-water.md) |
 
-When I first saw this problem, I thought about checking every possible buy-sell pair, but that would be O(n²) - too slow!
+### 📝 Strings
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 3 | [Longest Substring Without Repeating Characters](./02-Strings/Medium/longest-substring.md) | 🟡 Medium | [View](./02-Strings/Medium/longest-substring.md) |
+| 5 | [Longest Palindromic Substring](./02-Strings/Medium/longest-palindrome.md) | 🟡 Medium | [View](./02-Strings/Medium/longest-palindrome.md) |
 
-**The key insight**: As we go through the array, we only need to track:
-1. The **minimum price** we've seen so far (best day to buy)
-2. The **maximum profit** we can make
+### 🔗 Linked Lists
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 21 | [Merge Two Sorted Lists](./03-Linked-Lists/Easy/merge-sorted-lists.md) | 🟢 Easy | [View](./03-Linked-Lists/Easy/merge-sorted-lists.md) |
+| 206 | [Reverse Linked List](./03-Linked-Lists/Easy/reverse-linked-list.md) | 🟢 Easy | [View](./03-Linked-Lists/Easy/reverse-linked-list.md) |
 
-For each price, we:
-- Calculate profit if we sell today: `current_price - min_price`
-- Update our maximum profit if this is better
-- Update minimum price if current price is lower
+### 🌳 Trees
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 94 | [Binary Tree Inorder Traversal](./04-Trees/Easy/inorder-traversal.md) | 🟢 Easy | [View](./04-Trees/Easy/inorder-traversal.md) |
+| 102 | [Binary Tree Level Order Traversal](./04-Trees/Medium/level-order.md) | 🟡 Medium | [View](./04-Trees/Medium/level-order.md) |
 
-This way, we only need **one pass** through the array!
+### 💡 Dynamic Programming
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 70 | [Climbing Stairs](./05-Dynamic-Programming/Easy/climbing-stairs.md) | 🟢 Easy | [View](./05-Dynamic-Programming/Easy/climbing-stairs.md) |
+| 322 | [Coin Change](./05-Dynamic-Programming/Medium/coin-change.md) | 🟡 Medium | [View](./05-Dynamic-Programming/Medium/coin-change.md) |
 
-### Why This Works
-
-We're essentially asking at each day: "If I sell today, what's the best profit I can get?" and keeping track of the best answer.
+### 🔍 Binary Search
+| # | Problem | Difficulty | Solution |
+|---|---------|------------|----------|
+| 704 | [Binary Search](./06-Binary-Search/Easy/binary-search.md) | 🟢 Easy | [View](./06-Binary-Search/Easy/binary-search.md) |
 
 ---
 
-## 📝 Solution
+## 📖 About
 
-### Python Solution
+This repository contains my solutions to various LeetCode problems. Each solution includes:
 
-```python
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        """
-        Calculate maximum profit from single buy-sell transaction.
-        
-        Time Complexity: O(n) - single pass
-        Space Complexity: O(1) - only two variables
-        """
-        # Edge case: empty or single price
-        if not prices or len(prices) < 2:
-            return 0
-        
-        # Track minimum price seen so far (best buy day)
-        min_price = prices[0]
-        # Track maximum profit found
-        max_profit = 0
-        
-        # Iterate through each price
-        for price in prices[1:]:
-            # Calculate profit if we sell at current price
-            potential_profit = price - min_price
-            
-            # Update max profit if we found a better one
-            max_profit = max(max_profit, potential_profit)
-            
-            # Update min price if current price is lower
-            min_price = min(min_price, price)
-        
-        return max_profit
+- ✅ **Problem Description**: Clear explanation of the problem
+- 💡 **Approach**: My thought process and strategy
+- 📝 **Code**: Clean, well-commented solution
+- ⏱️ **Complexity Analysis**: Time and Space complexity
+- 🧪 **Test Cases**: Example inputs and outputs
+
+### Languages Used
+- Python (Primary)
+- JavaScript (Selected problems)
+- Java (Selected problems)
+
+---
+
+## 🎯 Repository Structure
+
 ```
-
-### Alternative Python Solution (More Concise)
-
-```python
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        min_price = float('inf')
-        max_profit = 0
-        
-        for price in prices:
-            min_price = min(min_price, price)
-            max_profit = max(max_profit, price - min_price)
-        
-        return max_profit
-```
-
-### JavaScript Solution
-
-```javascript
-/**
- * @param {number[]} prices
- * @return {number}
- */
-var maxProfit = function(prices) {
-    let minPrice = Infinity;
-    let maxProfit = 0;
-    
-    for (let price of prices) {
-        minPrice = Math.min(minPrice, price);
-        maxProfit = Math.max(maxProfit, price - minPrice);
-    }
-    
-    return maxProfit;
-};
+leetcode-solutions/
+├── 01-Arrays/
+│   ├── Easy/
+│   ├── Medium/
+│   └── Hard/
+├── 02-Strings/
+├── 03-Linked-Lists/
+├── 04-Trees/
+├── 05-Dynamic-Programming/
+└── ...
 ```
 
 ---
 
-## 📊 Complexity Analysis
+## 🤝 Contributing
 
-| Metric | Complexity | Explanation |
-|--------|------------|-------------|
-| **Time** | O(n) | Single pass through prices array |
-| **Space** | O(1) | Only using two variables regardless of input size |
-
-### Comparison with Brute Force
-
-| Approach | Time | Space | Why |
-|----------|------|-------|-----|
-| Brute Force | O(n²) | O(1) | Check all pairs |
-| Optimal (Ours) | O(n) | O(1) | Single pass with tracking |
+Feel free to:
+- Report issues
+- Suggest better solutions
+- Add alternative approaches
 
 ---
 
-## 🧪 Test Cases
+## 📬 Contact
 
-```python
-# Test Case 1: Profit possible
-prices = [7, 1, 5, 3, 6, 4]
-# Expected: 5 (buy at 1, sell at 6)
+- **LeetCode Profile**: [Your Profile](https://leetcode.com/yourusername)
+- **GitHub**: [@yourusername](https://github.com/yourusername)
 
-# Test Case 2: No profit possible
-prices = [7, 6, 4, 3, 1]
-# Expected: 0 (prices only decrease)
+---
 
-# Test Case 3: Buy and sell on consecutive days
-prices = [2, 4, 1]
-# Expected: 2 (buy at 2, sell at 4)
+<div align="center">
 
-# Test Case 4: Single price
-prices = [5]
-# Expected: 0 (can't make any transaction)
+**⭐ Star this repo if you find it helpful!**
 
-# Test Case 5: All same prices
-prices = [3, 3, 3, 3]
-# Expected: 0 (no profit to be made)
+Made with ❤️ and lots of ☕
+
+</div>
 
 # Test
