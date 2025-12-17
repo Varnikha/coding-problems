@@ -70,9 +70,8 @@ This repository contains my solutions to various LeetCode problems. Each solutio
 - 🧪 **Test Cases**: Example inputs and outputs
 
 ### Languages Used
-- Python (Primary)
-- JavaScript (Selected problems)
-- Java (Selected problems)
+- Java
+- c++
 
 ---
 
@@ -104,8 +103,7 @@ Feel free to:
 
 ## 📬 Contact
 
-- **LeetCode Profile**: [Your Profile](https://leetcode.com/yourusername)
-- **GitHub**: [@yourusername](https://github.com/yourusername)
+- **LeetCode Profile**: (https://leetcode.com/u/_varnikha-24/)
 
 ---
 
@@ -117,4 +115,3 @@ Made with ❤️ and lots of ☕
 
 </div>
 
-# Test
