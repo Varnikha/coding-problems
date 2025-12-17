@@ -1,11 +1,5 @@
 # 🚀 LeetCode Solutions Repository
 
-<div align="center">
-
-![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)
-![Problems Solved](https://img.shields.io/badge/Solved-150+-brightgreen?style=for-the-badge)
-![Language](https://img.shields.io/badge/Language-Python-blue?style=for-the-badge&logo=python)
-
 **A comprehensive collection of LeetCode problem solutions organized by topics and difficulty levels.**
 
 [View Solutions](#-solutions-by-topic) • [About](#-about) • [Contributing](#-contributing)
